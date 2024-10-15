@@ -44,7 +44,7 @@
             <div class="col-12 text-center">
                 <h1>Welcome to our Book & Author Tracker!</h1>
                 <p class="lead"><strong>This website helps you stay updated and allows you to update authors' works.</strong></p>
-                <a href="{{ url('/authors') }}" class="btn btn-primary">Continue</a>
+                <a href="<?php echo e(url('/authors')); ?>" class="btn btn-primary">Continue</a>
             </div>
         </div>
     </div>
@@ -55,3 +55,4 @@
 </body>
 
 </html>
+<?php /**PATH C:\Users\amira\Herd\crud-laravel\resources\views/welcome.blade.php ENDPATH**/ ?>
