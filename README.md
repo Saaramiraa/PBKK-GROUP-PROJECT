@@ -155,5 +155,6 @@ class User extends Authenticatable
     }
 }
 ```
-```
+[Watch the Video](https://youtu.be/N1SGlzeTg8Q?si=G176-jGPic9sW8dV)
+
 
