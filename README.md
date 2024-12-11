@@ -1,160 +1,149 @@
-<p align="center">
-  <a href="https://laravel.com" target="_blank">
-    <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo">
-  </a>
-</p>
+---
 
-<p align="center">
-  <a href="https://github.com/laravel/framework/actions">
-    <img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status">
-  </a>
-  <a href="https://packagist.org/packages/laravel/framework">
-    <img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads">
-  </a>
-  <a href="https://packagist.org/packages/laravel/framework">
-    <img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version">
-  </a>
-  <a href="https://packagist.org/packages/laravel/framework">
-    <img src="https://img.shields.io/packagist/l/laravel/framework" alt="License">
-  </a>
-</p>
+# Author Tracker Website
+
+The **Author Tracker Website** is a user-friendly web application built with Go and the Gin framework. This project provides a platform to manage authors and their books, with a focus on simplicity and efficiency. The system includes a homepage, dedicated pages for authors and books, and a collection page for displaying detailed book information.
 
 ---
 
-# Book and Author Management System
-
-The **Book and Author Management System** is a simple CRUD web application built using Laravel. This project allows users to manage a collection of authors and their books efficiently. It utilizes Laravel's Eloquent ORM to establish and maintain relationships between the two entities—authors and books—making it easy to perform complex operations while keeping the codebase clean and readable.
-
----
 ## Goals
-1. Implement CRUD functionality for both authors and books.
-2. Establish a One-to-Many relationship between authors and books.
-3. Create a user-friendly interface for managing books and authors.
-4. Ensure proper validation and error handling for all forms.
-5. Use Laravel's migration system to maintain database schema.
+
+1. Provide a streamlined interface for managing authors and their books.
+2. Implement CRUD functionality for authors and books.
+3. Establish relationships between authors and books using Go’s models.
+4. Utilize Gin controllers for clean and maintainable code.
+5. Include dynamic pages for displaying collections of books and authors.
+
 ---
 
 ## Key Features
 
-### Authors Management
-- Add, update, and delete authors.
-- View a list of all authors in the database.
+### Homepage
 
-### Books Management
-- Add new books and associate them with specific authors.
-- Delete books from the system.
+- **Get Started Button**: Redirects users to the Authors Page.
 
-### Eloquent Relationships
-- **One-to-Many relationship** between authors and books.
-- Automatically manage foreign key constraints using Laravel's migrations.
+### Authors Page
 
----
-## Steps for Development
+- **index.html**: Displays a list of all authors.
+- **create.html**: Allows users to add a new author.
+- **edit.html**: Provides functionality to update author details.
 
-### 1. Setup Laravel Project
-- Install a fresh Laravel project.
-- Configure the environment (set up database connection, etc.).
-  
-### 2. Database Design
-- Create the migration for the `authors` table with fields like `id`, `name`.
-- Create the migration for the `books` table with fields like `id`, `title`, `author_id`.
-- Run the migrations to create tables.
+### Books Page
 
-### 3. Model Creation
-- Create `Author` and `Book` models.
-- Define relationships:
-  - An author can have many books (`hasMany` relationship in the `Author` model).
-  - A book belongs to one author (`belongsTo` relationship in the `Book` model).
+- **Collection of Authors and Books**:
+  - Header: "Collection of Authors and Books"
+  - Description: "View and manage your favorite books here!"
+- **create.html**: Enables adding new books.
+- **detail.html**: Shows detailed information about a book.
+- **edit.html**: Facilitates editing book information.
+- **view\.html**: Displays a list of books and their authors.
 
-### 4. Controller Development
-- Create `AuthorController` to manage all CRUD operations for authors.
-- Create `BookController` to handle CRUD operations for books.
-  
-### 5. Testing
-- Test all features (CRUD functionality, form validation, and database interactions) to ensure they work as expected.
-- Ensure relationships between authors and books are correctly handled.
+### Collection Page
+
+- Displays all book titles, author names, descriptions (synopsis), and release dates.
 
 ---
-## Timeline
-- **Oct 9,2024** : Project Planning and Project Setup.
-- **Oct 10, 2024** : Database design, and migrations.
-- **Oct 12, 2024** : Create models, controllers, and routes for basic CRUD.
-- **Oct 13,2024** : Fix the error 
-- **Oct 16, 2024**: Final testing and preparation for submission.
 
 ## Technical Overview
 
-### Routes
-The system utilizes Laravel's powerful [Routing Engine](https://laravel.com/docs/routing) to map URLs to the appropriate controllers and actions.
-
-**Example routes:**
-- `GET /authors` – List all authors
-- `POST /authors` – Create a new author
-- `PUT /authors/{id}` – Update an author's details
-- `GET /books` – List all books
-- `POST /books` – Create a new book with an associated author
-
 ### Controllers
-The business logic is separated into controllers for clean and maintainable code:
-- `AuthorController` manages author-related CRUD operations.
-- `BookController` handles all book-related operations.
 
-### Models and Relationships
+1. **HomeController**: Manages the homepage and navigation.
+2. **AuthorController**: Handles all CRUD operations for authors.
+3. **BookController**: Manages CRUD operations for books.
+4. **CollectionController**: Displays the collection of books and authors.
 
-#### Author Model
-Defines the relationship `hasMany` with the `Book` model.
+### Models
 
-```php
-public function books() {
-    return $this->hasMany(Book::class);
-}
+- **AuthorModel**:
+  - Represents the author entity.
+  - Includes fields for author details.
+- **BookModel**:
+  - Represents the book entity.
+  - Includes fields for book details and associations with authors.
+
+### Entities
+
+- **author.go**: Defines the Author struct and its fields.
+- **book.go**: Defines the Book struct and its fields, including the relationship with authors.
+
+---
+
+## Project Structure
+
+```
+project-root/
+├── main.go
+├── controllers/
+│   ├── homecontroller.go
+│   ├── authorcontroller.go
+│   ├── bookcontroller.go
+│   └── collectioncontroller.go
+├── models/
+│   ├── authormodel.go
+│   ├── bookmodel.go
+├── entities/
+│   ├── author.go
+│   ├── book.go
+├── templates/
+│   ├── homepage.html
+│   ├── authors/
+│   │   ├── index.html
+│   │   ├── create.html
+│   │   └── edit.html
+│   ├── books/
+│   │   ├── create.html
+│   │   ├── detail.html
+│   │   ├── edit.html
+│   │   └── view.html
+│   └── collection/
+│       └── index.html
 ```
 
-#### Book Model
-Defines the relationship `belongsTo` with the `Author` model.
+---
 
-```php
-public function author() {
-    return $this->belongsTo(Author::class);
-}
-```
+## Steps for Development
 
-#### User Model
-The User model extends `Authenticatable` to handle user authentication. It includes properties for managing user data and securely hashing passwords.
+### 1. Setup Project
 
-```php
-<?php
+- Initialize a Go project.
+- Install the Gin framework.
 
-namespace App\Models;
+### 2. Database Design
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+- Create tables for authors and books with the following fields:
+  - **Authors**: `id`, `name`, `birthdate`, `bio`.
+  - **Books**: `id`, `title`, `author_id`, `synopsis`, `release_date`.
 
-class User extends Authenticatable
-{
-    use HasFactory, Notifiable;
+### 3. Model Creation
 
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+- Define the `Author` model with fields and relationships.
+- Define the `Book` model with fields and relationships.
 
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+### 4. Controller Development
 
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
-}
-```
-[Watch the Video](https://youtu.be/N1SGlzeTg8Q?si=G176-jGPic9sW8dV)
+- Implement CRUD operations in `authorcontroller.go` and `bookcontroller.go`.
+- Create routing for all endpoints.
 
+### 5. Frontend Integration
 
+- Develop dynamic templates using HTML and CSS.
+- Use JavaScript for interactivity.
+
+### 6. Testing
+
+- Test all features, including routing, database interactions, and templates.
+- Ensure relationships between authors and books work as expected.
+
+---
+
+## Example Routes
+
+- `GET /` – Displays the homepage.
+- `GET /authors` – Lists all authors.
+- `POST /authors` – Adds a new author.
+- `GET /books` – Lists all books.
+- `POST /books` – Adds a new book.
+- `GET /collection` – Displays the collection of books and authors.
+
+---
